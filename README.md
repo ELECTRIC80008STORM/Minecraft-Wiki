@@ -9,3 +9,6 @@ El programa utilizará clases para guardar la información básica de una gran c
  
 ## Uso:
 Más adelante el usuario podrá escoger de una serie de opciones cosas como el bloque del cual desea obtener información o si desea información general o un detalle en específico del mismo.
+
+## Registro de Cambios:
+1. Se modificaron atributos y métodos de las clases ya existentes para que fueran más acorde al UML realizado con herencia.
