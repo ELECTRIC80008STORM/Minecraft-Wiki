@@ -13,3 +13,4 @@ Más adelante el usuario podrá escoger de una serie de opciones cosas como el b
 ## Registro de Cambios:
 1. Se modificaron atributos y métodos de las clases ya existentes para que fueran más acorde al UML realizado con herencia.
 2. Se eliminaron los archivos "Cristal.h" y "Madera.h".
+3. Se añadieron los archivos de manera informal sobre los que se desea obtener retroalimentación en la asesoría. Estos todavía están en desarrollo.
