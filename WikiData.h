@@ -1,3 +1,14 @@
+/*
+* Proyecto Minecraft Wiki
+* Rommel T. C.
+* A01709922
+*/
+
+/*
+* Clase WikiData, la cuál maneja la información de los objetos de las
+* clases "Bloque", "Liquido" y "Mineral".
+*/
+
 #ifndef WIKIDATA_H_
 #define WIKIDATA_H_
 
@@ -8,21 +19,27 @@
 #include <iomanip>
 
 using namespace std;
-const int MAX = 100; //Quitar después y adaptar a los valores exactos.
+const int MAX = 100; //Constante del tamaño de los arreglos
 
 
 class WikiData {
     private:
+    //Declaración de atributos
     int indiceBloques = -1;
     int indiceLiquidos = -1;
     int indiceMinerales = -1;
     Bloque bloques[MAX];
     Liquido liquidos[MAX];
     Mineral minerales[MAX];
+    //Declaración de funciones privadas
+    void obtenerInformacionBloque(Bloque);
+    void obtenerInformacionBloque(Liquido);
+    void obtenerInformacionBloque(Mineral);
 
     public:
     //Constructor
     WikiData(){};
+    //Declaración de funciones públicas
     void añadirBloque(float, string, string, string, bool, bool);
     void añadirBloque(float, string, string, bool, bool, string, bool,\
     bool, bool, bool, bool, bool);
@@ -31,20 +48,22 @@ class WikiData {
     void añadirMineral(float, string, string, bool,\
     string, bool, string, string);
     void mostrarListaDeBloques();
-    void encontrarEnListaDeBloques();
-    string obtenerInformacionBloque(Bloque);
-    string obtenerInformacionBloque(Liquido);
-    string obtenerInformacionBloque(Mineral);
+    void encontrarEnListaDeBloques(float identifier);
+
 };
 
+/* Definición de Funciones */
+
+//Permite añadir un bloque (general) con el primer tipo de constructor
 void WikiData::añadirBloque(float identifier, string nameIdentifier, string name,\
     string obtainable, bool canBeCrafted, bool flammable){
         indiceBloques += 1;
         Bloque aux(identifier, nameIdentifier, name,\
         obtainable, canBeCrafted, flammable);
         bloques[indiceBloques] = aux;
-};
+}
 
+//Permite añadir un bloque (general) con el segundo tipo de constructor
 void WikiData::añadirBloque(float identifier, string nameIdentifier, string name,\
     bool interactive, bool breakable, string obtainable, bool canBeCrafted,\
     bool damage, bool obeysPhysics, bool flammable, bool luminous, bool transparent){
@@ -53,153 +72,281 @@ void WikiData::añadirBloque(float identifier, string nameIdentifier, string nam
     interactive, breakable, obtainable, canBeCrafted,\
     damage, obeysPhysics, flammable, luminous, transparent);
         bloques[indiceBloques] = aux;
-};
+}
 
+//Permite añadir un bloque (liquido) con el constructor
 void WikiData::añadirLiquido(float identifier, string nameIdentifier, string name,\
     bool damage,bool luminous, bool transparent,\
     string propagation, string properties){
-        indiceBloques += 1;
+        indiceLiquidos += 1;
         Liquido aux(identifier, nameIdentifier, name,\
     damage,luminous, transparent, propagation, properties);
         liquidos[indiceLiquidos] = aux;
-};
+}
 
+//Permite añadir un bloque (mineral) con el primer tipo de constructor
 void WikiData::añadirMineral(float identifier, string nameIdentifier, string name,\
     string obtainable, string itemDrop, string localitation){
-        indiceBloques += 1;
+        indiceMinerales += 1;
         Mineral aux(identifier, nameIdentifier, name,\
         obtainable, itemDrop, localitation);
         minerales[indiceMinerales] = aux;
-};
+}
 
+//Permite añadir un bloque (mineral) con el segundo tipo de constructor
 void WikiData::añadirMineral(float identifier, string nameIdentifier, string name,\
     bool interactive, string obtainable, bool luminous,\
     string itemDrop, string localitation){
-        indiceBloques += 1;
+        indiceMinerales += 1;
         Mineral aux(identifier, nameIdentifier, name,\
     interactive, obtainable, luminous, itemDrop, localitation);
         minerales[indiceMinerales] = aux;
-};
+}
 
+//Permite mostrar la lista de bloques y da el formato de tabla a la misma
 void WikiData::mostrarListaDeBloques(){
+    int width = 6;
     cout << "Bloques Sólidos Regulares:" << endl;
-    cout << left << setw(6) << "ID" << left << "Nombre del Bloque" << endl;
+    cout << left << setw(width) << "ID" << left << "Nombre del Bloque" << endl;
     for(int i = 0; i <= indiceBloques; i++){
-        cout << left << setw(6) <<\
+        cout << left << setw(width) <<\
         bloques[i].getIdNumerico() <<\
         left << bloques[i].getNombre() << endl;  
     }
 
     cout << "\nBloques Líquidos:" << endl;
-    cout << left << setw(6) << "ID" << left << "Nombre del Bloque" << endl;
+    cout << left << setw(width) << "ID" << left << "Nombre del Bloque" << endl;
     for(int i = 0; i <= indiceLiquidos; i++){
-        cout << left << setw(6) <<\
+        cout << left << setw(width) <<\
         liquidos[i].getIdNumerico() <<\
         left << liquidos[i].getNombre() << endl;  
     }
 
     cout << "\nMinerales:" << endl;
-    cout << left << setw(6) << "ID" << left << "Nombre del Bloque" << endl;
+    cout << left << setw(width) << "ID" << left << "Nombre del Bloque" << endl;
     for(int i = 0; i <= indiceMinerales; i++){
-        cout << left << setw(6) <<\
+        cout << left << setw(width) <<\
         minerales[i].getIdNumerico() <<\
         left << minerales[i].getNombre() << endl;  
     }
-};
+    cout << endl << endl;
+}
+
+//Permiten obtener la información de los objetos de "bloque", "liquido" y "mineral", aprovechando el overloading de funciones
+void WikiData::obtenerInformacionBloque(Bloque bloque){
+    int width = 36;
+    cout << bloque.getNombre() << endl << endl;
+    cout << left << setw(width) << "Id Númerico:" << left << bloque.getIdNumerico() << endl;
+    cout << left << setw(width - 1) << "Id del Nombre:" << left << bloque.getIdNombre() << endl;
+    cout << left << setw(width - 1) << "Nombre:" << left << bloque.getNombre() << endl;
+    if(bloque.getInteractuable() == 1){
+        cout << left << setw(width) << "¿Interactuable?:" << left << "Se puede interactuar con este bloque." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Interactuable?:" << left << "No se puede interactuar con este bloque." << endl;
+    }
+    if(bloque.getPuedeRomperse() == 1){
+        cout << left << setw(width) << "¿Puede romperse?:" << left << "Este bloque puede ser roto." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Puede romperse?:" << left << "Este bloque es irrompible, por lo tanto solo " <<
+        "podrá romperse mediante creativo." << endl;
+    }
+    cout << left << setw(width + 1) << "¿Obtención?:" << left << bloque.getObtencion() << endl;
+    if(bloque.getCrafteable() == 1){
+        cout << left << setw(width) << "¿Crafteable?:" << left << "Este bloque puede craftearse." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Crafteable?:" << left << "Este bloque no puede ser crafteado." << endl;
+    }
+    if(bloque.getDanno() == 0){
+        cout << left << setw(width + 1) << "¿Produce daño al jugador?:" << left << "Este bloque no ocasionará daño al jugador " <<
+        "de manera general." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Produce daño al jugador?:" << left << "Este bloque puede ocasionar daño al " <<
+        "jugador sí se esta en contacto." << endl;
+    }
+    if(bloque.getObedeceGravedad() == 0){
+        cout << left << setw(width) << "¿Es afectado por la gravedad?:" << left << "Este bloque no será afectado si rompes " <<
+        "su bloque de soporte." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Es afectado por la gravedad?:" << left << "Este bloque sufrirá cambios si rompes " <<
+        "el bloque que lo soporta" << endl;
+    }
+    if(bloque.getFlamable() == 1){
+        cout << left << setw(width) << "¿Es flamable?:" << left << "Este bloque puede prenderse en fuego al estar en proximidad " <<
+        "de lava o fuego, y puede ayudar a propagarlo." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Es flamable?:" << left << "Este bloque no desaparecerá ni será consumido al ser afectado "
+        << "por fuego o lava." << endl;
+    }
+    if(bloque.getLuminoso() == 1){
+        cout << left << setw(width) << "¿Produce luz?:" << left << "Este bloque tiene la capacidad de producir luz." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Produce luz?:" << left << "Este bloque no emite ningún tipo de luz." << endl;
+    }
+    if(bloque.getTransparente() == 1){
+        cout << left << setw(width) << "¿Es transparente?:" << left << "Este bloque permite el paso de la luz." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Es transparente?:" << left << "Este bloque no permitirá que la luz lo atraviese." << endl;
+        }
+    cout << endl << endl;
+}
+
+void WikiData::obtenerInformacionBloque(Liquido liquido){
+    int width = 36;
+    cout << liquido.getNombre() << endl << endl;
+    cout << left << setw(width) << "Id Númerico: " << left << liquido.getIdNumerico() << endl;
+    cout << left << setw(width - 1) << "Id del Nombre: " << left << liquido.getIdNombre() << endl;
+    cout << left << setw(width - 1) << "Nombre: " << left << liquido.getNombre() << endl;
+    if(liquido.getInteractuable() == 1){
+        cout << left << setw(width) << "¿Interactuable?: " << left << "Se puede interactuar con este bloque." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Interactuable?: " << left << "No se puede interactuar con este bloque." << endl;
+    }
+    if(liquido.getPuedeRomperse() == 1){
+        cout << left << setw(width) << "¿Puede romperse?: " << left << "Este bloque puede ser roto." << endl;
+    }
+    cout << left << setw(width) << "¿Puede romperse?: " << left << "Este bloque no puede romperse al ser un líquido pero " <<
+    "podrá quitarse al sustituir el espacio" << left << setw(width + 28) << "" << left << "con un bloque físico o tomandolo con una cubeta." << endl;
+    cout << left << setw(width + 1) << "¿Obtención?: " << left << liquido.getObtencion() << endl;
+    if(liquido.getCrafteable() == 1){
+        cout << left << setw(width) << "¿Crafteable?: " << left << "Este bloque puede craftearse." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Crafteable?: " << left << "Este bloque no puede ser crafteado." << endl;
+    }
+    if(liquido.getDanno() == 0){
+        cout << left << setw(width) << "¿Produce daño al jugador?: " << left << "Este bloque no ocasionará daño al jugador " <<
+        "de manera general." << endl;
+    }
+    else{
+        cout << left << setw(width + 1) << "¿Produce daño al jugador?: " << left << "Este bloque puede ocasionar daño al " <<
+        "jugador sí se esta en contacto." << endl;
+    }
+    if(liquido.getObedeceGravedad() == 0){
+        cout << left << setw(width + 1) << "¿Es afectado por la gravedad?: " << left << "Este bloque no será afectado si rompes " <<
+        "su bloque de soporte." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Es afectado por la gravedad?: " << left << "Este bloque buscará extenderse hacia los lados " <<
+        "y hacia abajo." << endl;
+    }
+    if(liquido.getFlamable() == 1){
+        cout << left << setw(width) << "¿Es flamable?: " << left << "Este bloque puede prenderse en fuego al estar en proximidad " <<
+        "de lava o fuego, y puede ayudar a propagarlo." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Es flamable?: " << left << "Al ser un líquido el bloque no será afectado por el fuego." << endl;
+    }
+    if(liquido.getLuminoso() == 1){
+        cout << left << setw(width) << "¿Produce luz?: " << left << "Este bloque tiene la capacidad de producir luz." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Produce luz?: " << left << "Este bloque no emite ningún tipo de luz." << endl;
+    }
+    if(liquido.getTransparente() == 1){
+        cout << left << setw(width) << "¿Es transparente?: " << left << "Este bloque permite el paso de la luz." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Es transparente?: " << left << "Este bloque no permitirá que la luz lo atraviese." << endl;
+        }
+    cout << left << setw(width) << "Distancia de Propagación: " << left << liquido.getPropagacion() << endl;
+    cout << left << setw(width - 1) << "Propiedades: " << left << liquido.getPropiedades() << endl;
+    cout << endl << endl;
+}
+
+void WikiData::obtenerInformacionBloque(Mineral mineral){
+    int width = 36;
+    cout << mineral.getNombre() << endl << endl;
+    cout << left << setw(width) << "Id Númerico: " << left << mineral.getIdNumerico() << endl;
+    cout << left << setw(width - 1) << "Id del Nombre: " << left << mineral.getIdNombre() << endl;
+    cout << left << setw(width - 1) << "Nombre: " << left << mineral.getNombre() << endl;
+    if(mineral.getInteractuable() == 1){
+        cout << left << setw(width) << "¿Interactuable?: " << left << "Se puede interactuar con este bloque." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Interactuable?: " << left << "No se puede interactuar con este bloque." << endl;
+    }
+    if(mineral.getPuedeRomperse() == 1){
+        cout << left << setw(width) << "¿Puede romperse?: " << left << "Este bloque puede ser roto siempre " << 
+        "que se tenga la herramienta correcta." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Puede romperse?: " << left << "Este bloque es irrompible, por lo tanto solo " <<
+        "podrá romperse mediante creativo." << endl;
+    }
+    cout << left << setw(width + 1) << "¿Obtención?: " << left << mineral.getObtencion() << endl;
+    if(mineral.getCrafteable() == 1){
+        cout << left << setw(width) << "¿Crafteable?: " << left << "Este bloque puede craftearse." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Crafteable?: " << left << "Este bloque no puede ser crafteado." << endl;
+    }
+    if(mineral.getDanno() == 0){
+        cout << left << setw(width + 1) << "¿Produce daño al jugador?: " << left << "Este bloque no ocasionará daño al jugador " <<
+        "de manera general." << endl;
+    }
+    else{
+        cout << left << setw(width + 1) << "¿Produce daño al jugador?: " << left << "Este bloque puede ocasionar daño al " <<
+        "jugador sí se esta en contacto." << endl;
+    }
+    if(mineral.getObedeceGravedad() == 0){
+        cout << left << setw(width) << "¿Es afectado por la gravedad?: " << left << "Este bloque no será afectado si rompes " <<
+        "su bloque de soporte." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Es afectado por la gravedad?: " << left << "Este bloque sufrirá cambios si rompes el " <<
+        "bloque que lo soporta" << endl;
+    }
+    if(mineral.getFlamable() == 1){
+        cout << left << setw(width) << "¿Es flamable?: " << left << "Este bloque puede prenderse en fuego al estar en proximidad " <<
+        "de lava o fuego, y puede ayudar a propagarlo." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Es flamable?: " << left << "Este bloque no desaparecerá ni será consumido al ser afectado "
+        << "por fuego o lava." << endl;
+    }
+    if(mineral.getLuminoso() == 1){
+        cout << left << setw(width) << "¿Produce luz?: " << left << "Este bloque tiene la capacidad de producir luz." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Produce luz?: " << left << "Este bloque no emite ningún tipo de luz." << endl;
+    }
+    if(mineral.getTransparente() == 1){
+        cout << left << setw(width) << "¿Es transparente?: " << left << "Este bloque permite el paso de la luz." << endl;
+    }
+    else{
+        cout << left << setw(width) << "¿Es transparente?: " << left << "Este bloque no permitirá que la luz lo atraviese." << endl;
+        }
+    cout << left << setw(width) << "¿Drops?: " << left << mineral.getDrop() << endl;
+    cout << left << setw(width) << "Localización de Spawneo: " << left << mineral.getLocalizacion() << endl;
+    cout << endl << endl;
+}
+
+//Permite encontrar un objeto entre los arreglos y dar su información
+void WikiData::encontrarEnListaDeBloques(float identifier){
+    bool encontrado = false;
+    for(int i = 0; i <= indiceBloques; i++){
+        if(bloques[i].getIdNumerico() == identifier) {obtenerInformacionBloque(bloques[i]); encontrado = true;}
+    }
+    for(int i = 0; i <= indiceLiquidos; i++){
+        if(liquidos[i].getIdNumerico() == identifier) {obtenerInformacionBloque(liquidos[i]); encontrado = true;}
+    }
+    for(int i = 0; i <= indiceMinerales; i++){
+        if(minerales[i].getIdNumerico() == identifier) {obtenerInformacionBloque(minerales[i]); encontrado = true;}
+    }
+    if(encontrado == false){
+        cout << "\nEl bloque que deseas buscar no fue encontrado." << endl <<
+        "Tip: Revisa que hayas escrito el número correctamente." << endl << endl;
+    }
+}
+
 
 #endif
-    // string Bloque::getIdNumerico(){
-    //     return "Id Númerico: " + idNumerico + "\n";
-    // }
-    
-    // string Bloque::getIdNombre(){
-    //     return "Id del Nombre: " + idNombre + "\n";
-    // }
-    
-    // string Bloque::getNombre(){
-    //     return "Nombre: " + nombre + "\n";
-    // }
-    
-    // string Bloque::getInteractuable(){
-    //     if(interactuable == 1){
-    //         return "¿Interactuable?: Se puede interactuar con este bloque.\n";
-    //     }
-    //     else{
-    //         return "¿Interactuable?: No se puede interactuar con este bloque.\n";
-    //     }
-    // }
-    
-    // string Bloque::getPuedeRomperse(){
-    //     if(puedeRomperse == 1){
-    //         return "¿Puede romperse?: Este bloque puede ser roto.\n";
-    //     }
-    //     else{
-    //         return "¿Puede romperse?: Este bloque es irrompible.\n";
-    //     }
-    // }
-    
-    // string Bloque::getObtencion(){
-    //     if(puedeRomperse == 0){
-    //         return "¿Cómo se obtiene?: Este bloque solo puede conseguirse\
-    //         mediante el creativo o mediante comandos.\n";
-    //     }
-    //     else{
-    //         return "¿Cómo se obtiene?: " + obtencion + "\n";
-    //     }
-    // }
-    
-    // string Bloque::getCrafteable(){
-    //     if(crafteable == 1){
-    //         return "¿Crafteable?: Este bloque puede craftearse.\n";
-    //     }
-    //     else{
-    //         return "¿Crafteable?: Este bloque no puede ser crafteado.\n";
-    //     }
-    // }
-
-    // string Bloque::getDanno(){
-    //     return "¿Produce daño al jugador?: Este bloque no ocasionará daño al jugador\
-    //     de manera general.\n";
-    // }
-
-    // string Bloque::getDanno(string metodo_danno){
-    //     return "¿Produce daño al jugador?: " + metodo_danno + "\n";
-    // }
-    
-    // string Bloque::getObedeceGravedad(){
-    //     return "¿Es afectado por la gravedad?: Este bloque no será afectado si rompes\
-    //     su bloque de soporte.\n";
-    // }
-
-    // string Bloque::getObedeceGravedad(string efecto){
-    //     return "¿Es afectado por la gravedad?: " + efecto + "\n";
-    // }
-    
-    // string Bloque::getFlamable(){
-    //     if(flamable == 1){
-    //         return "¿Es flamable?: Este objeto puede prenderse en fuego al estar en proximidad\
-    //         de lava o fuego, y puede ayudar a propagarlo.\n";
-    //     }
-    //     else{
-    //         return "¿Es flamable?: Este objeto no desaparecerá ni será consumido al ser afectado\
-    //         por fuego o lava.\n";
-    //     }
-    // }
-    
-    // string Bloque::getLuminoso(){
-    //     if(luminoso == 1){
-    //         return "¿Produce luz?: Este bloque tiene la capacidad de producir luz.\n";
-    //     }
-    //     else{
-    //         return "¿Produce luz?: Este bloque no emite ningún tipo de luz.\n";
-    //     }
-    // }
-    
-    // string Bloque::getTransparente(){
-    //     if(transparente == 1){
-    //         return "¿Es transparente?: Este bloque permite el paso de la luz.\n";
-    //     }
-    //     else{
-    //         return "¿Es transparente?: Este bloque no permitirá que la luz lo atraviese.\n";
-    //     }
-    // }

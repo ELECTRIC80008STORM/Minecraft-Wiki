@@ -1,3 +1,15 @@
+/*
+* Proyecto Minecraft Wiki
+* Rommel T. C.
+* A01709922
+*/
+
+/*
+* Clase Mineral
+* Tiene los atributos y métodos básicos de los minerales, y hereda de la clase
+* padre (Bloque)
+*/
+
 #ifndef MINERAL_H_
 #define MINERAL_H_
 
@@ -9,12 +21,6 @@ using namespace std;
 class Mineral : public Bloque {
     //Atributos
     private:
-    bool puedeRomperse = true;
-    bool crafteable = false;
-    bool danno = false;
-    bool obedeceGravedad = false;
-    bool flamable = false;
-    bool transparente = false;
     string drop;
     string localizacion;
 
@@ -36,14 +42,20 @@ class Mineral : public Bloque {
 
 //Constructores
 Mineral::Mineral(){
-  idNumerico = -1.0;
-  idNombre = "";
-  nombre = "";
-  interactuable = false;
-  obtencion = "";
-  luminoso = false;
-  drop = "";
-  localizacion = "";
+    idNumerico = -1.0;
+    idNombre = "";
+    nombre = "";
+    interactuable = false;
+    puedeRomperse = true;
+    obtencion = "";
+    crafteable = false;
+    danno = false;
+    obedeceGravedad = false;
+    flamable = false;
+    luminoso = false;
+    transparente = false;
+    drop = "";
+    localizacion = "";
 }
 
 Mineral::Mineral(float identifier, string nameIdentifier, string name,\
@@ -52,7 +64,12 @@ Mineral::Mineral(float identifier, string nameIdentifier, string name,\
   idNombre = nameIdentifier;
   nombre = name;
   interactuable = false;
+  puedeRomperse = true;
   obtencion = obtainable;
+  crafteable = false;
+  danno = false;
+  obedeceGravedad = false;
+  flamable = false;
   luminoso = false;
   drop = itemDrop;
   localizacion = localitation;
@@ -64,8 +81,14 @@ Mineral::Mineral(float identifier, string nameIdentifier, string name,\
   idNombre = nameIdentifier;
   nombre = name;
   interactuable = interactive;
+  puedeRomperse = true;
   obtencion = obtainable;
+  crafteable = false;
+  danno = false;
+  obedeceGravedad = false;
+  flamable = false;
   luminoso = luminous;
+  transparente = false;
   drop = itemDrop;
   localizacion = localitation;
 }

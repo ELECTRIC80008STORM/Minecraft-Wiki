@@ -1,3 +1,15 @@
+/*
+* Proyecto Minecraft Wiki
+* Rommel T. C.
+* A01709922
+*/
+
+/*
+* Clase Liquido
+* Tiene los atributos y métodos básicos de los liquidos, y hereda de la clase
+* padre (Bloque)
+*/
+
 #ifndef LIQUIDO_H_
 #define LIQUIDO_H_
 
@@ -9,12 +21,6 @@ using namespace std;
 class Liquido : public Bloque {
     //Atributos
     private:
-    bool interactuable = true;
-    bool puedeRomperse = false;
-    string obtencion = "Puede obtenerse mediante una cubeta.\n";
-    bool crafteable = false;
-    bool obedeceGravedad = true;
-    bool flamable = false;
     string propagacion;
     string propiedades;
 
@@ -34,10 +40,16 @@ class Liquido : public Bloque {
 
 //Constructores
 Liquido::Liquido(){
-  idNumerico = -1.0;
+ idNumerico = -1.0;
   idNombre = "";
   nombre = "";
+  interactuable = true;
+  puedeRomperse = false;
+  obtencion = "Puede obtenerse mediante una cubeta.";
+  crafteable = false;
   danno = "";
+  obedeceGravedad = true;
+  flamable = false;
   luminoso = false;
   transparente = false;
   propagacion = "";
@@ -45,11 +57,17 @@ Liquido::Liquido(){
 }
 
 Liquido::Liquido(float identifier, string nameIdentifier, string name,\
-  bool damage,bool luminous, bool transparent, string propagation, string properties){
+  bool damage, bool luminous, bool transparent, string propagation, string properties){
   idNumerico = identifier;
   idNombre = nameIdentifier;
   nombre = name;
+  interactuable = true;
+  puedeRomperse = false;
+  obtencion = "Puede obtenerse mediante una cubeta.";
+  crafteable = false;
   danno = damage;
+  obedeceGravedad = true;
+  flamable = false;
   luminoso = luminous;
   transparente = transparent;
   propagacion = propagation;

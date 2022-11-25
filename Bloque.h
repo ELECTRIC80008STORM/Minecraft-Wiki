@@ -1,3 +1,15 @@
+/*
+* Proyecto Minecraft Wiki
+* Rommel T. C.
+* A01709922
+*/
+
+/*
+* Clase Bloque
+* Tiene los atributos y métodos básicos, y funciona como creador de objetos y
+* padre de clases
+*/
+
 #ifndef BLOQUE_H_
 #define BLOQUE_H_
 
@@ -80,11 +92,11 @@ string obtainable, bool canBeCrafted, bool flammable){
     nombre = name;
     interactuable = false;
     puedeRomperse = true;
-    obtencion = "";
-    crafteable = false;
+    obtencion = obtainable;
+    crafteable = canBeCrafted;
     danno = false;
     obedeceGravedad = false;
-    flamable = false;
+    flamable = flammable;
     luminoso = false;
     transparente = false;
 }
