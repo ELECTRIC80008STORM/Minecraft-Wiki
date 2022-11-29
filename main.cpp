@@ -46,19 +46,96 @@ int main(){
     WikiData wikidata;
     int opcion;
     //Inicialización de Los Bloques Precargados
+    //Plantilla bloque sencillo
     wikidata.añadirBloque(1,"stone","Piedra","Puede ser obtenido mediante cualquier tipo de pico.",false,false);
+    
     wikidata.añadirBloque(1.3,"stone","Diorita","Puede ser obtenido mediante cualquier tipo de pico.",false,false);
+    wikidata.añadirBloque(2,"grass","Pasto","Puede ser obtenido mediante una herramienta con toque de seda.",false,false);
+    wikidata.añadirBloque(3,"dirt","Tierra",\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente para conseguirla es la pala.",false,false);
+    wikidata.añadirBloque(4,"cobblestone","Roca","Puede ser obtenido mediante cualquier tipo de pico.",false,false);
+    
+    wikidata.añadirBloque(5,"planks","Tablones de Madera de Roble",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    true,false,false,true,false,false);
+    wikidata.añadirBloque(5.1,"planks","Tablones de Madera de Abeto",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    true,false,false,true,false,false);
+    wikidata.añadirBloque(5.2,"planks","Tablones de Madera de Abedul",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    true,false,false,true,false,false);
+    wikidata.añadirBloque(5.3,"planks","Tablones de Madera de Jungla",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    true,false,false,true,false,false);
+    wikidata.añadirBloque(5.4,"planks","Tablones de Madera de Acacia",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    true,false,false,true,false,false);
+    wikidata.añadirBloque(5.5,"planks","Tablones de Madera de Roble Oscuro",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    true,false,false,true,false,false);
+
+    wikidata.añadirBloque(17,"log","Madera de Roble",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    false,false,false,true,false,false);
+    wikidata.añadirBloque(17.1,"log","Madera de Abeto",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    false,false,false,true,false,false);
+    wikidata.añadirBloque(17.2,"log","Madera de Abedul",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    false,false,false,true,false,false);
+    wikidata.añadirBloque(17.3,"log","Madera de Jungla",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    false,false,false,true,false,false);
+    wikidata.añadirBloque(17.4,"log","Madera de Acacia",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    false,false,false,true,false,false);
+    wikidata.añadirBloque(17.5,"log","Madera de Roble Oscuro",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
+    false,false,false,true,false,false);  
+
+     wikidata.añadirBloque(12,"sand","Arena",false,true,\
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente para conseguirla es la pala.",\
+    false,false,true,false,false,false);
+
+    wikidata.añadirBloque(7,"bedrock","Piedra Base",false,false,\
+    "Solo puede ser obtenido mediante el creativo.",false,false,false,false,false,false);
+
+    //Plantilla bloque completo
     wikidata.añadirBloque(13,"gravel","Grava",false,true,\
-    "Puede ser obtenido de cualquier manera pero la más eficiente es una pala.",false,false,true,false,false,false);
+    "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente para conseguirla es la pala.",\
+    false,false,true,false,false,false);
     
+
+    //Plantilla bloque líquido
     wikidata.añadirLiquido(8,"flowing_water","Agua En Flujo",true,\
-    false,true,"Tiene una propagación de 7 bloques.",\
-    "Sí el jugador permanece mucho tiempo debajo se consumirá su barra de oxígeno.");
+    false,true,"Tiene una propagación de 7 bloques en una superficie plana.\n",\
+    "Sí un mob permanece mucho tiempo sumergido en el agua se consumirá su barra de oxígeno "
+    "(también afecta a los jugadores). \nTambién tiene la capacidad de neutralizar explosiones "
+    "para evitar el daño a bloques cercanos (pero no ha los mobs). \nAl mesclarze con lava puede producir "
+    "distintos tipos de bloques.");
+    wikidata.añadirLiquido(10,"flowing_lava","Lava En Flujo",true,\
+    true,false,"Tiene una propagación de 3 bloques en una superfice plana en el mundo normal.",\
+    "La lava prenderá en fuego cualquier entidad que entre en contacto con la misma,\nsi un objeto cae en "
+    "ella se quemará y perdera para siempre al menos que tenga resitencia al fuego. \nTambién puede "
+    "alimentar un horno para cocinar 100 bloques.");
     
-    wikidata.añadirMineral(14,"gold_ore","Oro","Puede ser obtenido mediante cualquier tipo de pico.",\
-    "Bloque de Oro","Entre la capa 10");
-    wikidata.añadirMineral(15,"iron_ore","Hierro","Puede ser obtenido mediante cualquier tipo de pico.",\
-    "Bloque de Hierro","Entre la capa 10");
+    //Plantilla mineral común
+    wikidata.añadirMineral(14,"gold_ore","Mena de Oro","Puede ser obtenido mediante cualquier tipo de pico a partir del de hierro.",\
+    "Bloque de Mena de Oro","Entre la capa 0 a 31 para todos los biomas y entre 28 y 80 para el bioma \"Badlands\".");
+    wikidata.añadirMineral(15,"iron_ore","Mena de Hierro",\
+    "Puede ser obtenido mediante cualquier tipo de pico a partir del de piedra.",\
+    "Bloque de Mena de Hierro","Alrededor y por debajo del nivel del mar, es decir, bajo la capa 68.");
+    wikidata.añadirMineral(16,"coal_ore","Mena de Carbón",\
+    "Puede ser obtenido mediante cualquier tipo de pico a partir del de piedra.",\
+    "Carbón","Entre la capa 0 a 127 para todos los biomas.");
+    // wikidata.añadirMineral(14,"gold_ore","Mena de Oro",\
+    // "Puede ser obtenido mediante cualquier tipo de pico a partir del de hierro.",\
+    // "Bloque de Mena de Oro","Entre la capa 0 a 127 para todos los biomas.");
+
+
+
+    //Plantilla mineral completo
+
 
     //Funcionamiento del Main
     printf("\e[1;1H\e[2J");
