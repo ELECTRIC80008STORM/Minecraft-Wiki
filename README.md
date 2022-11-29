@@ -16,3 +16,4 @@ Más adelante el usuario podrá escoger de una serie de opciones cosas como el b
 3. Se añadieron los archivos de manera informal sobre los que se desea obtener retroalimentación en la asesoría. Estos todavía están en desarrollo. En estos cambios la clase "Bloque.h" y el Diagrama de Clases (UML) fueron sustituidos por archivos más actualizados.
 4. Se eliminó el archivo "Testeo" que fué usado para la asesoría.
 5. Se subió la versión más actualizada del archivo "Bloque.h", "Liquido.h", "Mineral.h" y "WikiData.h", así también como del "main.cpp". También se subió la versión más reciente del Diagrama de Clases UML.
+6. Se subió la versión más reciente del "main.cpp", la cuál ya permite crear nuevos bloques (objetos / instancias).
