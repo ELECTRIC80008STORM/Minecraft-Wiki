@@ -1,5 +1,5 @@
 # Minecraft Wiki Básica de Bloques
-Este será una guía básica de las principales características de los bloques más comunes de Minecraft, esta listará diversos bloques y permitirá conocer sus propiedades y atributos.
+Este será una guía básica de las principales características de los bloques más comunes de Minecraft (basado en la versión Java Edition), esta listará diversos bloques y permitirá conocer sus propiedades y atributos.
  
 ## Utilidad:
 El tener esta guía servirá de apoyo para las personas que realizan mods y addons de minecraft pues les permitirá tener a su alcance características básicas acerca de los bloques, así también como un listado de algunos de los bloques básicos en Minecraft con sus respectivas cualidades.
