@@ -18,3 +18,4 @@ Más adelante el usuario podrá escoger de una serie de opciones cosas como el b
 5. Se subió la versión más actualizada del archivo "Bloque.h", "Liquido.h", "Mineral.h" y "WikiData.h", así también como del "main.cpp". También se subió la versión más reciente del Diagrama de Clases UML.
 6. Se subió la versión más reciente del "main.cpp", la cuál ya permite crear nuevos bloques (objetos / instancias).
 7. Se añadieron más bloques a la base local de la app de la Wiki.
+8. Se subió la versión final de todos los archivos a excepción del Diagrama de Clases de UML.
