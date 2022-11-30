@@ -9,7 +9,7 @@
 * acerca de bloques comúnes con los que se pueden encontrar jugadores no experimentados.
 */
 
-//Biblioteca
+//Bibliotecas
 #include "WikiData.h"
 #include <iostream>
 #include <iomanip>
@@ -17,10 +17,9 @@
 
 using namespace std;
 
-//Contador usado en el main
-int adminCounter = 0;
+int adminCounter = 0; //Contador usado en la función menu
 
-//Funciones
+//Declaración de las funciones
 void sleep(float);
 void menu(WikiData);
 void modoAdmin(WikiData);
@@ -30,31 +29,38 @@ Solución al problema en el cuál "cin" deja de tomar el input del usuario.
 Copiado de: https://latedev.wordpress.com/2011/09/13/simple-input-bullet-proofing-in-c/
 La función fue editada para ser de utilidad en el programa.
 */
+
+//Template allows us to reutilize code that does the same but takes a different type of instance sometimes.
 template <typename T>
+
+//const string & prompt allows you to show a message eacht time the loop iterates (it doesn't recieve the input that it expects).
 T ReadType(const string & prompt, string message) {
     T n;
     while( (cout << prompt) && ! (cin>> n) ) {
         cout << endl << message << endl;
-        cin.clear();
+
+        cin.clear(); //Helps in clearing the fail flag that the stream got after an incorrect form of input.
+        
+        //It ignores the bad form of input that stayed in the buffer, thanks to the code numeric_limits<int>::max(), '\n' 
+        //which gives the biggest possible value of an int, so that ignore can ignore more that one character at a time
         cin.ignore( numeric_limits<int>::max(), '\n' );
     }
     return n;
 }
 
-//Código Principal
 int main(){
     WikiData wikidata;
     int opcion;
-    //Inicialización de Los Bloques Precargados
-    //Plantilla bloque sencillo
+
+    //Inicialización de los Bloques usados en WikiData.
     wikidata.añadirBloque(1,"stone","Piedra","Puede ser obtenido mediante cualquier tipo de pico.",false,false);
-    
     wikidata.añadirBloque(1.3,"stone","Diorita","Puede ser obtenido mediante cualquier tipo de pico.",false,false);
     wikidata.añadirBloque(2,"grass","Pasto","Puede ser obtenido mediante una herramienta con toque de seda.",false,false);
     wikidata.añadirBloque(3,"dirt","Tierra",\
     "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente para conseguirla es la pala.",false,false);
     wikidata.añadirBloque(4,"cobblestone","Roca","Puede ser obtenido mediante cualquier tipo de pico.",false,false);
     
+    //Bloques de Tablones de Madera
     wikidata.añadirBloque(5,"planks","Tablones de Madera de Roble",false,true,\
     "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
     true,false,false,true,false,false);
@@ -74,6 +80,7 @@ int main(){
     "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
     true,false,false,true,false,false);
 
+    //Bloques de Madera
     wikidata.añadirBloque(17,"log","Madera de Roble",false,true,\
     "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente es el hacha.",\
     false,false,false,true,false,false);
@@ -96,17 +103,13 @@ int main(){
      wikidata.añadirBloque(12,"sand","Arena",false,true,\
     "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente para conseguirla es la pala.",\
     false,false,true,false,false,false);
-
-    wikidata.añadirBloque(7,"bedrock","Piedra Base",false,false,\
-    "Solo puede ser obtenido mediante el creativo.",false,false,false,false,false,false);
-
-    //Plantilla bloque completo
     wikidata.añadirBloque(13,"gravel","Grava",false,true,\
     "Puede ser obtenido al romperse con cualquier cosa, pero la herramienta más eficiente para conseguirla es la pala.",\
     false,false,true,false,false,false);
-    
+    wikidata.añadirBloque(7,"bedrock","Piedra Base",false,false,\
+    "Solo puede ser obtenido mediante el creativo.",false,false,false,false,false,false);
 
-    //Plantilla bloque líquido
+    //Bloques líquidos
     wikidata.añadirLiquido(8,"flowing_water","Agua En Flujo",true,\
     false,true,"Tiene una propagación de 7 bloques en una superficie plana.\n",\
     "Sí un mob permanece mucho tiempo sumergido en el agua se consumirá su barra de oxígeno "
@@ -116,10 +119,10 @@ int main(){
     wikidata.añadirLiquido(10,"flowing_lava","Lava En Flujo",true,\
     true,false,"Tiene una propagación de 3 bloques en una superfice plana en el mundo normal.",\
     "La lava prenderá en fuego cualquier entidad que entre en contacto con la misma,\nsi un objeto cae en "
-    "ella se quemará y perdera para siempre al menos que tenga resitencia al fuego. \nTambién puede "
+    "ella se quemará y perdera para siempre al menos que tenga resistencia al fuego. \nTambién puede "
     "alimentar un horno para cocinar 100 bloques.");
     
-    //Plantilla mineral común
+    //Minerales
     wikidata.añadirMineral(14,"gold_ore","Mena de Oro","Puede ser obtenido mediante cualquier tipo de pico a partir del de hierro.",\
     "Bloque de Mena de Oro","Entre la capa 0 a 31 para todos los biomas y entre 28 y 80 para el bioma \"Badlands\".");
     wikidata.añadirMineral(15,"iron_ore","Mena de Hierro",\
@@ -128,13 +131,6 @@ int main(){
     wikidata.añadirMineral(16,"coal_ore","Mena de Carbón",\
     "Puede ser obtenido mediante cualquier tipo de pico a partir del de piedra.",\
     "Carbón","Entre la capa 0 a 127 para todos los biomas.");
-    // wikidata.añadirMineral(14,"gold_ore","Mena de Oro",\
-    // "Puede ser obtenido mediante cualquier tipo de pico a partir del de hierro.",\
-    // "Bloque de Mena de Oro","Entre la capa 0 a 127 para todos los biomas.");
-
-
-
-    //Plantilla mineral completo
 
 
     //Funcionamiento del Main
@@ -151,15 +147,24 @@ int main(){
     return 0;
 }
 
-/* Definición de las funciones */
-
-//Función que crea un delay
+/**
+ * Esta función crea un delay mediante recorrer un arreglo vacío grande.
+ *
+ * @param float timeOfDelay: el tiempo que quieres que dure el delay. No es exacto.
+ * @return
+ */
 void sleep(float timeOfDelay){
     timeOfDelay *= 10000;
     for(int i; i <= timeOfDelay; i++){}
 };
 
-//Función que provee la funcionalidad del menú
+/**
+ * Esta función crea un menú para dar funcionalidad a la app y usar los métodos de la clase "WikiData".
+ * Esto se realiza mediante el uso de una expresión switch la cual posee las distintas opciones del menú.
+ *
+ * @param WikiData wikidata: El objeto de tipo WikiData que requiere la función para acceder a los distintos métodos.
+ * @return
+ */
 void menu(WikiData wikidata){
     cout << "A continuación escoge una de las siguientes opciones escribiendo unicamente el número en la consola:\n";
     cout << "1. Ver la Lista de Bloques." << endl
@@ -178,55 +183,63 @@ void menu(WikiData wikidata){
     switch (opcion)
     {
     case 1:
-    wikidata.mostrarListaDeBloques();
-    sleep(6.4);
-    menu(wikidata);
+        wikidata.mostrarListaDeBloques();
+        sleep(6.4);
+        menu(wikidata);
         break;
     case 2:
-    float identifier;
-    cout << "\nEscribe el ID Númerico del bloque del cuál desees ver su información: ";
-    identifier = ReadType<float>("","Tip:\nEscribe el ID Númerico del bloque del cuál desees ver su información: ");
-    cout << endl;
-    wikidata.encontrarEnListaDeBloques(identifier);
-    sleep(5.6);
-    menu(wikidata);
+        float identifier;
+        cout << "\nEscribe el ID Númerico del bloque del cuál desees ver su información: ";
+        identifier = ReadType<float>("","Tip:\nEscribe el ID Númerico del bloque del cuál desees ver su información: ");
+        cout << endl;
+        wikidata.encontrarEnListaDeBloques(identifier);
+        sleep(5.6);
+        menu(wikidata);
         break;
     case 3:
-    if(adminCounter == 0){
-        cout << "\nFelicidades..." << endl;
-        sleep(2.4);
-        cout << "Ahora eres admin. Se te abrió la nueva opción de añadir bloques." << endl <<
-        "Pero se cuidadoso." << endl;
-        sleep(1.8);
-        cout << "Una vez añades un bloque, nunca se puede quitar..." << endl << endl;
-        adminCounter += 1;
-        sleep(2.8);
-    }
-    else{
-        cout << "Ya eres actualmente admin." << endl;
-        sleep(2.3);
-        cout << "¿Acaso este nuevo poder no fué suficiente para tí?...";
-        sleep(4.2);
-    }
-    menu(wikidata);
+        if(adminCounter == 0){
+            cout << "\nFelicidades..." << endl;
+            sleep(2.4);
+            cout << "Ahora eres admin. Se te abrió la nueva opción de añadir bloques." << endl <<
+            "Pero se cuidadoso." << endl;
+            sleep(1.8);
+            cout << "Una vez añades un bloque, nunca se puede quitar..." << endl << endl;
+            adminCounter += 1;
+            sleep(2.8);
+        }
+        else{
+            cout << "Ya eres actualmente admin." << endl;
+            sleep(2.3);
+            cout << "¿Acaso este nuevo poder no fué suficiente para tí?..." << endl << endl;
+            sleep(4.2);
+        }
+        menu(wikidata);
         break;
     case 4:
-    sleep(2.4);
-    cout << "\n\nEso fue todo, esperamos que te haya gustado nuestra WIKI." << endl << "Vuelve pronto !!!" << endl;
+        sleep(2.2);
+        printf("\e[1;1H\e[2J");
+        cout << "Eso fue todo, esperamos que te haya gustado nuestra WIKI." << endl << "Vuelve pronto !!!" << endl;
         break;
     case 42:
-    modoAdmin(wikidata);
-    sleep(2.4);
+        modoAdmin(wikidata);
+        sleep(2.4);
         break;
     default:
-    cout << "\nTip: Coloca el número de alguna de las opciones mostradas." << endl << endl;
-    sleep(2.4);
-    menu(wikidata);
+        cout << "\nTip: Coloca el número de alguna de las opciones mostradas." << endl << endl;
+        sleep(2.4);
+        menu(wikidata);
         break;
     }  
 }
 
-//Función que permité añadir bloques
+/**
+ * Esta subfunción de "menu" crea un menú para permitir añadir bloques mediante los métodos de la clase WikiData.
+ * Los bloques que permite añadir son: "Bloque General", "Liquido" y "Mineral".
+ * Los cuales hacen uso de la función añadirBloque(), añadirLiquido() y añadirMineral() respectivamente.
+ *
+ * @param WikiData wikidata: El objeto de tipo WikiData que requiere la función para acceder a los distintos métodos.
+ * @return
+ */
 void modoAdmin(WikiData wikidata){
     int opcionModoAdmin;
     float identifier;
@@ -245,6 +258,7 @@ void modoAdmin(WikiData wikidata){
     string properties;
     string itemDrop;
     string localitation;
+    
     cout << "\nEscoge que tipo de bloque deseas añadir:\n";
     cout << "1. Bloque General." << endl << "2. Liquido" <<
     endl << "3. Mineral" << endl << endl;
@@ -263,7 +277,7 @@ void modoAdmin(WikiData wikidata){
             identifier = ReadType<float>("","El ID debe ser mayor a 0 y distinto al resto de IDs");
         }
         
-        cout << "\nIngresa el ID del nombre del bloque que deseas añadir." << endl;
+        cout << "\nIngresa el ID del nombre (tipo de bloque) del bloque que deseas añadir." << endl;
         getline(cin >> ws,nameIdentifier);
         
         cout << "\nIngresa el nombre del bloque que deseas añadir." << endl;
@@ -315,7 +329,7 @@ void modoAdmin(WikiData wikidata){
             identifier = ReadType<float>("","El ID debe ser mayor a 0 y distinto al resto de IDs");
         }
         
-        cout << "\nIngresa el ID del nombre del bloque líquido que deseas añadir." << endl;
+        cout << "\nIngresa el ID del nombre (tipo de bloque) del bloque líquido que deseas añadir." << endl;
         getline(cin >> ws,nameIdentifier);
         
         cout << "\nIngresa el nombre del bloque líquido que deseas añadir." << endl;
@@ -353,7 +367,7 @@ void modoAdmin(WikiData wikidata){
             identifier = ReadType<float>("","El ID debe ser mayor a 0 y distinto al resto de IDs");
         }
         
-        cout << "\nIngresa el ID del nombre del bloque de mineral que deseas añadir." << endl;
+        cout << "\nIngresa el ID del nombre (tipo de bloque) del bloque de mineral que deseas añadir." << endl;
         getline(cin >> ws,nameIdentifier);
         
         cout << "\nIngresa el nombre del mineral que deseas añadir." << endl;
@@ -382,9 +396,9 @@ void modoAdmin(WikiData wikidata){
         menu(wikidata);
         break;
     default:
-    cout << "\nTip: Coloca el número de alguna de las opciones mostradas." << endl << endl;
-    sleep(2.4);
-    modoAdmin(wikidata);
+        cout << "\nTip: Coloca el número de alguna de las opciones mostradas." << endl << endl;
+        sleep(2.4);
+        modoAdmin(wikidata);
         break;
     }
 }

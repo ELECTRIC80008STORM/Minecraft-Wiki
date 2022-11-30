@@ -18,78 +18,120 @@
 
 using namespace std;
 
+//Declaración de clase liquido, que es una clase hijo
 class Liquido : public Bloque {
-    //Atributos
+    //Declaración de variables de instancia
     private:
     string propagacion;
     string propiedades;
 
     public:
-    //Constructores
+    //Declaración de los constructores y métodos
     Liquido();
     Liquido(float identifier, string nameIdentifier, string name,\
     bool damage,bool luminous, bool transparent,\
     string propagation, string properties);
-    //Getters
     string getPropagacion();
     string getPropiedades();
-    //Setters
     void setPropagacion(string propagation);
     void setPropiedades(string properties);
 };
 
-//Constructores
+/**
+ * Constructor por default que inicializa con valores predeterminados
+ *
+ * @param
+ * @return Objeto Liquido
+ */
 Liquido::Liquido(){
- idNumerico = -1.0;
-  idNombre = "";
-  nombre = "";
-  interactuable = true;
-  puedeRomperse = false;
-  obtencion = "Puede obtenerse mediante una cubeta.";
-  crafteable = false;
-  danno = "";
-  obedeceGravedad = true;
-  flamable = false;
-  luminoso = false;
-  transparente = false;
-  propagacion = "";
-  propiedades = "";
+    idNumerico = -1.0;
+    idNombre = "";
+    nombre = "";
+    interactuable = true;
+    puedeRomperse = false;
+    obtencion = "Puede obtenerse mediante una cubeta.";
+    crafteable = false;
+    danno = "";
+    obedeceGravedad = true;
+    flamable = false;
+    luminoso = false;
+    transparente = false;
+    propagacion = "";
+    propiedades = "";
 }
 
+/**
+ * Constructor que recibe parámetros para llenar las variables de instancia faltantes
+ *
+ * @param float identifier: id del bloque líquido,
+ * string nameIdentifier: nombre usado para identificar el bloque líquido,
+ * string name: nombre del bloque líquido,
+ * bool damage: si el bloque líquido causa daño al estar en contacto con él,
+ * bool luminous: si emite algún tipo de luz, bool transparent: si permite el paso de la luz,
+ * string propagation: la distancia que el bloque líquido puede propagarse,
+ * string properties: las propiedades del bloque líquido.
+ * @return Objeto Liquido
+ */
 Liquido::Liquido(float identifier, string nameIdentifier, string name,\
-  bool damage, bool luminous, bool transparent, string propagation, string properties){
-  idNumerico = identifier;
-  idNombre = nameIdentifier;
-  nombre = name;
-  interactuable = true;
-  puedeRomperse = false;
-  obtencion = "Puede obtenerse mediante una cubeta.";
-  crafteable = false;
-  danno = damage;
-  obedeceGravedad = true;
-  flamable = false;
-  luminoso = luminous;
-  transparente = transparent;
-  propagacion = propagation;
-  propiedades = properties;
+bool damage, bool luminous, bool transparent, string propagation, string properties){
+    idNumerico = identifier;
+    idNombre = nameIdentifier;
+    nombre = name;
+    interactuable = true;
+    puedeRomperse = false;
+    obtencion = "Puede obtenerse mediante una cubeta.";
+    crafteable = false;
+    danno = damage;
+    obedeceGravedad = true;
+    flamable = false;
+    luminoso = luminous;
+    transparente = transparent;
+    propagacion = propagation;
+    propiedades = properties;
 }
 
 //Getters
+
+/**
+ * getter propagacion
+ *
+ * @param
+ * @return string: la distancia que el bloque líquido puede propagarse
+*/
 string Liquido::getPropagacion(){
-  return propagacion;
+    return propagacion;
 }
 
+/**
+ * getter propiedades
+ *
+ * @param
+ * @return string: las propiedades del bloque líquido
+*/
 string Liquido::getPropiedades(){
-  return propiedades;
+    return propiedades;
 }
 
 //Setters
+
+/**
+ * setter propagacion
+ *
+ * @param string propagation: la distancia que el bloque líquido puede propagarse
+ * @return
+*/
 void Liquido::setPropagacion(string propagation){
-  propagacion = propagation;
+    propagacion = propagation;
 }
 
+/**
+ * setter propiedades
+ *
+ * @param string properties: las propiedades del bloque líquido
+ * @return
+*/
 void Liquido::setPropiedades(string properties){
-  propiedades = properties;
+    propiedades = properties;
 }
 
 #endif
