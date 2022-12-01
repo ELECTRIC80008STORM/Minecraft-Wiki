@@ -10,7 +10,7 @@ Al usuario se le permite escoger entre una serie de opciones, desde poder ver la
 Al usuario (manejador de la base de datos de la Wiki, admin) se le proporciona la capacidad de meter bloques a la Wiki.
 
 ## Correcciones:
-UML (Nota: Entre varias cosas olvidé comentarlo en las asesorías): 
+UML (Nota: Entre tantas cosas olvidé comentarlo en las asesorías): 
 1. Sub-Competencia: Diseño clases sencillas completas (con todos los atributos y métodos requeridos). **Avance 2**
 
 * Error Original: El becario me colocó un 0 en la calificación por no poner los constructores ni los tipos de datos que eran *void* en el diagrama de clases.
