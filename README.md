@@ -19,3 +19,4 @@ Más adelante el usuario podrá escoger de una serie de opciones cosas como el b
 6. Se subió la versión más reciente del "main.cpp", la cuál ya permite crear nuevos bloques (objetos / instancias).
 7. Se añadieron más bloques a la base local de la app de la Wiki.
 8. Se subió la versión final de todos los archivos a excepción del Diagrama de Clases de UML.
+9. Corrección en el archivo "Mineral.h" en donde no se definia el valor de "transparente" como false para el primer constructor con parámetros.
