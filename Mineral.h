@@ -83,6 +83,7 @@ string obtainable, string itemDrop, string localitation){
     obedeceGravedad = false;
     flamable = false;
     luminoso = false;
+    transparente = false;
     drop = itemDrop;
     localizacion = localitation;
 }
